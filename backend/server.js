@@ -17,23 +17,25 @@ app.post("/predict", (req, res) => {
   console.log("Received prediction request for model:", model_name);
   console.log("Content received:", content);
 
-  // Run Python script
-  const python = spawn("python3", ["predict.py", model_name, content]);
 
-  let result = "";
-  python.stdout.on("data", (data) => {
-    console.log("Python output:", data.toString());
-    result += data.toString();
-  });
+  res.send("human detected");
+  // // Run Python script
+  // const python = spawn("python3", ["predict.py", model_name, content]);
 
-  python.stderr.on("data", (data) => {
-    console.error("Python error:", data.toString());
-  });
+  // let result = "";
+  // python.stdout.on("data", (data) => {
+  //   console.log("Python output:", data.toString());
+  //   result += data.toString();
+  // });
 
-  python.on("close", () => {
-    console.log("Sending response:", result.trim());
-    res.json({ model: model_name, prediction: result.trim() });
-  });
+  // python.stderr.on("data", (data) => {
+  //   console.error("Python error:", data.toString());
+  // });
+
+  // python.on("close", () => {
+  //   console.log("Sending response:", result.trim());
+  //   res.json({ model: model_name, prediction: result.trim() });
+  // });
 });
 
 
