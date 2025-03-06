@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res)=>{
+  res.send("Server Running")
+})
+
 app.post("/predict", (req, res) => {
   const { model_name, content } = req.body;
   console.log("Received prediction request for model:", model_name);
